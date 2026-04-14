@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=nexa@700,800,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* SixTone Studio Palette - Modern Chinese Aesthetic */
+  /* Primary: Imperial Red */
+  --primary: 354 78% 54%;
+  --primary-foreground: 0 0% 98%;
+
+  /* Secondary: Muted Gold/Amber */
+  --secondary: 45 93% 47%;
+  --secondary-foreground: 0 0% 98%;
+
+  /* Background: Warm Paper/Rice Paper */
+  --background: 40 20% 99%;
+  --foreground: 20 10% 15%;
+
+  /* Card: Slightly distinct from background */
+  --card: 0 0% 100%;
+  --card-foreground: 20 10% 15%;
+
+  /* Popovers */
+  --popover: 0 0% 100%;
+  --popover-foreground: 20 10% 15%;
+
+  /* Muted elements (Ink gray) */
+  --muted: 240 5% 96%;
+  --muted-foreground: 240 4% 46%;
+
+  /* Accents */
+  --accent: 40 20% 96%;
+  --accent-foreground: 240 6% 10%;
+
+  /* Destructive */
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+
+  /* Borders */
+  --border: 240 6% 90%;
+  --input: 240 6% 90%;
+  --ring: 354 78% 54%;
+
+  --radius: 0.75rem;
+
+  --font-sans: 'DM Sans', sans-serif;
+  --font-display: 'Nexa', 'DM Sans', sans-serif;
+}
+
+.dark {
+  /* Dark Mode - Deep Lacquer Box */
+  --background: 20 10% 10%;
+  --foreground: 0 0% 98%;
+
+  --card: 20 10% 12%;
+  --card-foreground: 0 0% 98%;
+
+  --popover: 20 10% 12%;
+  --popover-foreground: 0 0% 98%;
+
+  --primary: 354 70% 60%;
+  --primary-foreground: 0 0% 98%;
+
+  --secondary: 45 80% 50%;
+  --secondary-foreground: 20 10% 10%;
+
+  --muted: 20 10% 16%;
+  --muted-foreground: 240 5% 65%;
+
+  --accent: 20 10% 16%;
+  --accent-foreground: 0 0% 98%;
+
+  --destructive: 0 63% 31%;
+  --destructive-foreground: 0 0% 98%;
+
+  --border: 20 10% 18%;
+  --input: 20 10% 18%;
+  --ring: 354 70% 60%;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-primary/20 selection:text-primary;
+    font-family: var(--font-sans);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    @apply font-semibold tracking-tight;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  /* Custom scrollbar for a cleaner look */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/20 rounded-full transition-colors;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/40;
+  }
+}
+
+/* Animation utilities */
+.animate-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
