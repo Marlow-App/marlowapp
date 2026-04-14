@@ -1,0 +1,73 @@
+Effective Date: February 28, 2026
+SixToneStudio is operated by 말로교육 주식회사 (Marlow Education Co., Ltd.) ("Company", "we", "us", "our").
+If you have questions about this Privacy Policy, contact:
+📧 julesyexplains@gmail.com
+
+1. Eligibility
+This service is intended for individuals 18 years of age or older.
+We do not knowingly collect data from minors.
+
+2. Information We Collect
+We may collect:
+Account Information
+Email address
+Account credentials (stored securely)
+Audio Recordings
+Voice recordings submitted for pronunciation feedback
+Associated feedback and analysis
+Usage Data
+Log data
+Device/browser information
+Interaction with the platform
+Payment Information
+If you subscribe, payments are processed by Stripe.
+We do not store full credit card details.
+
+3. How We Use Information
+We use collected data to:
+Provide personalized tone feedback
+Improve pronunciation training accuracy
+Maintain and secure the platform
+Develop and improve internal tools, including potential internal AI or machine learning systems
+Process subscriptions and payments
+We do not sell your personal data.
+
+4. Audio Data & AI Development
+Voice recordings may be used:
+To provide you with feedback
+To improve service quality
+To develop internal AI systems for automated feedback
+If used for AI development:
+Data may be anonymized where reasonably possible
+It will not be sold or licensed to third parties
+You may request deletion of your recordings at any time (see Section 7).
+
+5. Data Storage
+Our application is hosted using Replit infrastructure.
+We take reasonable steps to protect your data, including:
+Access controls
+Secure storage practices
+Limiting internal access
+However, no system is completely secure.
+
+6. Data Retention
+We retain:
+Account data while your account is active
+Audio recordings until deleted by you or upon request
+If you delete your account or request deletion, we will delete or anonymize your data within a reasonable timeframe, subject to technical limitations and legal obligations.
+
+7. Your Rights
+You may:
+Request access to your data
+Request correction
+Request deletion
+Withdraw consent for audio processing
+To exercise these rights, email:
+📧 julesyexplains@gmail.com
+
+8. International Users
+By using this service, you understand that your data may be processed outside your country of residence.
+
+9. Changes to This Policy
+We may update this Privacy Policy. Continued use of the service constitutes acceptance of updates.
+
