@@ -1,3 +1,4 @@
+console.log("SCHEMA VERSION 123");
 // server/db/schema.ts
 
 import {
