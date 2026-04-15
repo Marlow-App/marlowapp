@@ -12,7 +12,7 @@ import {
 } from "drizzle-orm/pg-core";
 
 import { relations } from "drizzle-orm";
-import { users } from "../models/auth"; // adjust if needed
+import { users } from "../server/models/auth";
 
 // =========================
 // DATABASE TABLES
