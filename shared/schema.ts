@@ -1,5 +1,6 @@
 console.log("SCHEMA VERSION 123");
-// server/db/schema.ts
+
+// shared/schema.ts
 
 import {
   pgTable,
@@ -13,7 +14,6 @@ import {
 } from "drizzle-orm/pg-core";
 
 import { relations } from "drizzle-orm";
-import { users } from "../models/auth";
 
 // =========================
 // DATABASE TABLES
@@ -30,12 +30,12 @@ export const pronunciationErrors = pgTable("pronunciation_errors", {
   minimalPairs: text("minimal_pairs"),
   practiceWords: text("practice_words").array(),
   isCustom: boolean("is_custom").default(false).notNull(),
-  createdBy: varchar("created_by").references(() => users.id),
+  createdBy: varchar("created_by"), // ❌ removed FK for now
 });
 
 export const recordings = pgTable("recordings", {
   id: serial("id").primaryKey(),
-  userId: varchar("user_id").notNull().references(() => users.id),
+  userId: varchar("user_id").notNull(), // ❌ removed FK
   audioUrl: text("audio_url").notNull(),
   sentenceText: text("sentence_text").notNull(),
   status: text("status", { enum: ["pending", "reviewed"] })
@@ -49,12 +49,8 @@ export const recordings = pgTable("recordings", {
 
 export const feedback = pgTable("feedback", {
   id: serial("id").primaryKey(),
-  recordingId: integer("recording_id")
-    .notNull()
-    .references(() => recordings.id),
-  reviewerId: varchar("reviewer_id")
-    .notNull()
-    .references(() => users.id),
+  recordingId: integer("recording_id").notNull(),
+  reviewerId: varchar("reviewer_id").notNull(),
   textFeedback: text("text_feedback").notNull(),
   corrections: text("corrections"),
   audioFeedbackUrl: text("audio_feedback_url"),
@@ -69,18 +65,16 @@ export const feedback = pgTable("feedback", {
 
 export const practiceListItems = pgTable("practice_list_items", {
   id: serial("id").primaryKey(),
-  userId: varchar("user_id").notNull().references(() => users.id),
-  errorId: text("error_id")
-    .notNull()
-    .references(() => pronunciationErrors.id),
+  userId: varchar("user_id").notNull(),
+  errorId: text("error_id").notNull(),
   character: text("character"),
-  recordingId: integer("recording_id").references(() => recordings.id),
+  recordingId: integer("recording_id"),
   addedAt: timestamp("added_at").defaultNow().notNull(),
 });
 
 export const creditTransactions = pgTable("credit_transactions", {
   id: serial("id").primaryKey(),
-  userId: varchar("user_id").notNull().references(() => users.id),
+  userId: varchar("user_id").notNull(),
   type: text("type", {
     enum: ["signup_bonus", "daily_reward", "purchase", "spend", "refund"],
   }).notNull(),
@@ -92,13 +86,13 @@ export const creditTransactions = pgTable("credit_transactions", {
 
 export const supportTickets = pgTable("support_tickets", {
   id: serial("id").primaryKey(),
-  userId: varchar("user_id").notNull().references(() => users.id),
+  userId: varchar("user_id").notNull(),
   category: text("category").notNull(),
   message: text("message").notNull(),
   status: text("status", { enum: ["open", "completed"] })
     .default("open")
     .notNull(),
-  resolvedById: varchar("resolved_by_id").references(() => users.id),
+  resolvedById: varchar("resolved_by_id"),
   resolvedAt: timestamp("resolved_at"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
@@ -114,8 +108,8 @@ export const dailyCrosswords = pgTable("daily_crosswords", {
 
 export const crosswordCompletions = pgTable("crossword_completions", {
   id: serial("id").primaryKey(),
-  userId: varchar("user_id").notNull().references(() => users.id),
-  puzzleId: integer("puzzle_id").notNull().references(() => dailyCrosswords.id),
+  userId: varchar("user_id").notNull(),
+  puzzleId: integer("puzzle_id").notNull(),
   puzzleDate: text("puzzle_date").notNull(),
   cells: jsonb("cells").notNull().default({}),
   elapsedSeconds: integer("elapsed_seconds"),
@@ -124,40 +118,15 @@ export const crosswordCompletions = pgTable("crossword_completions", {
 });
 
 // =========================
-// RELATIONS
+// RELATIONS (optional for now)
 // =========================
 
-export const recordingsRelations = relations(recordings, ({ one, many }) => ({
-  user: one(users, {
-    fields: [recordings.userId],
-    references: [users.id],
-  }),
-  feedback: many(feedback),
-}));
-
-export const feedbackRelations = relations(feedback, ({ one }) => ({
-  recording: one(recordings, {
-    fields: [feedback.recordingId],
-    references: [recordings.id],
-  }),
-  reviewer: one(users, {
-    fields: [feedback.reviewerId],
-    references: [users.id],
-  }),
-}));
-
-export const creditTransactionsRelations = relations(
-  creditTransactions,
-  ({ one }) => ({
-    user: one(users, {
-      fields: [creditTransactions.userId],
-      references: [users.id],
-    }),
-  })
-);
+export const recordingsRelations = relations(recordings, () => ({}));
+export const feedbackRelations = relations(feedback, () => ({}));
+export const creditTransactionsRelations = relations(creditTransactions, () => ({}));
 
 // =========================
-// TYPES (server-only)
+// TYPES
 // =========================
 
 export type Recording = typeof recordings.$inferSelect;
